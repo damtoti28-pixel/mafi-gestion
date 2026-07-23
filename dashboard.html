@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAFII GESTION</title>
+<link rel="stylesheet" href="dashboard-style.css">
+</head>
+<body>
+
+<div id="offline-banner" class="offline-banner hidden">
+  <span>Hors-ligne — les opérations sont enregistrées et seront synchronisées dès le retour du réseau.</span>
+</div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <img src="assets/logo.png" alt="Mafii Gestion" class="hero-logo">
+    <div class="hero-text">
+      <h1>mafii gestion</h1>
+      <p>suivi des dettes et relicats de la collecte</p>
+    </div>
+    <div class="sync-pill" id="sync-pill">
+      <span class="dot"></span>
+      <span id="sync-label">connecté</span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="stats-grid">
+    <div class="stat-card">
+      <p class="stat-label">total dettes en attente</p>
+      <p class="stat-value danger" id="stat-dettes">0 F</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-label">total relicats en attente</p>
+      <p class="stat-value warning" id="stat-relicats">0 F</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-label">personnes suivies</p>
+      <p class="stat-value" id="stat-personnes">0</p>
+    </div>
+  </section>
+
+  <section class="actions-row">
+    <button class="btn btn-danger" id="btn-open-dette">
+      <span class="icn">＋</span> enregistrer une dette
+    </button>
+    <button class="btn btn-warning" id="btn-open-relicat">
+      <span class="icn">＋</span> enregistrer un relicat
+    </button>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <h2>liste des personnes</h2>
+      <input type="text" id="search-people" placeholder="rechercher un nom...">
+    </div>
+    <div id="people-list" class="people-list">
+      <p class="empty-state">aucune personne enregistrée pour le moment.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <h2>récapitulatif par personne</h2>
+      <select id="recap-select">
+        <option value="">choisir une personne...</option>
+      </select>
+    </div>
+    <div id="recap-content" class="recap-content">
+      <p class="empty-state">sélectionnez une personne pour voir son historique.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- Modal: nouvelle opération -->
+<div class="modal-overlay hidden" id="modal-op">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modal-op-title">nouvelle dette</h3>
+      <button class="modal-close" id="modal-op-close">×</button>
+    </div>
+    <form id="form-op">
+      <label>nom de la personne</label>
+      <input type="text" id="op-nom" list="people-datalist" placeholder="ex: Ama Koffi" required>
+      <datalist id="people-datalist"></datalist>
+
+      <label>type d'opération</label>
+      <div class="type-toggle">
+        <button type="button" class="type-btn active" data-type="dette" id="type-dette-btn">dette</button>
+        <button type="button" class="type-btn" data-type="relicat" id="type-relicat-btn">relicat</button>
+      </div>
+
+      <label>montant (F CFA)</label>
+      <input type="number" id="op-montant" min="1" step="1" placeholder="ex: 5000" required>
+
+      <p class="hint" id="op-datetime-hint"></p>
+
+      <button type="submit" class="btn btn-primary full">enregistrer</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: opérations d'une personne (régler / modifier) -->
+<div class="modal-overlay hidden" id="modal-person">
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <h3 id="modal-person-name">—</h3>
+      <button class="modal-close" id="modal-person-close">×</button>
+    </div>
+    <div id="modal-person-ops" class="ops-list"></div>
+  </div>
+</div>
+
+<!-- Modal: modifier une opération -->
+<div class="modal-overlay hidden" id="modal-edit">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>modifier l'opération</h3>
+      <button class="modal-close" id="modal-edit-close">×</button>
+    </div>
+    <form id="form-edit">
+      <label>type d'opération</label>
+      <div class="type-toggle">
+        <button type="button" class="type-btn" data-type="dette" id="edit-type-dette-btn">dette</button>
+        <button type="button" class="type-btn" data-type="relicat" id="edit-type-relicat-btn">relicat</button>
+      </div>
+      <label>montant (F CFA)</label>
+      <input type="number" id="edit-montant" min="1" step="1" required>
+      <label>statut</label>
+      <div class="type-toggle">
+        <button type="button" class="status-btn" data-status="en_attente" id="edit-status-attente-btn">en attente</button>
+        <button type="button" class="status-btn" data-status="reglee" id="edit-status-reglee-btn">réglée</button>
+      </div>
+      <button type="submit" class="btn btn-primary full">enregistrer les modifications</button>
+    </form>
+  </div>
+</div>
+
+<!-- Zone imprimable (PDF) -->
+<div id="print-area" class="print-area"></div>
+
+<script type="module" src="config-firebase.js"></script>
+<script type="module" src="dashboard-app.js"></script>
+</body>
+</html>
