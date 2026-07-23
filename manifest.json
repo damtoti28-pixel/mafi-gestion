@@ -1,0 +1,24 @@
+{
+  "name": "Mafi Gestion",
+  "short_name": "Mafi Gestion",
+  "description": "Suivi des dettes et relicats de la collecte",
+  "start_url": "./dashboard.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#04342C",
+  "theme_color": "#04342C",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
