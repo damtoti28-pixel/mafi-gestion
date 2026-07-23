@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MAFII GESTION</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<meta name="theme-color" content="#04342C">
 <link rel="stylesheet" href="dashboard-style.css">
 </head>
 <body>
@@ -145,5 +149,12 @@
 
 <script type="module" src="config-firebase.js"></script>
 <script type="module" src="dashboard-app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(console.error);
+  });
+}
+</script>
 </body>
 </html>
