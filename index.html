@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le Baobab Doré — Restaurant</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="header">
+    <nav class="nav">
+      <div class="nav-logo">
+        <span class="logo-icon">🌿</span>
+        <span class="logo-text">Le Baobab Doré</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#menu">Menu du jour</a></li>
+        <li><a href="#reservation">Réserver</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-cta" onclick="document.getElementById('reservation').scrollIntoView({behavior:'smooth'})">
+        Réserver maintenant
+      </button>
+    </nav>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="accueil">
+    <div class="hero-texture"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Restaurant & Saveurs d'Afrique</p>
+      <h1 class="hero-title">Une table où<br/><em>chaque plat</em><br/>raconte une histoire</h1>
+      <p class="hero-sub">Cuisine africaine authentique revisitée avec passion.<br/>Lomé, Togo — ouvert tous les jours de 11h à 22h</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Voir le menu du jour</button>
+        <button class="btn-outline" onclick="document.getElementById('reservation').scrollIntoView({behavior:'smooth'})">Faire une réservation</button>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <span class="badge-day" id="hero-day">Lundi</span>
+      <span class="badge-label">Menu du jour disponible</span>
+    </div>
+  </section>
+
+  <!-- ===== INFOS RAPIDES ===== -->
+  <section class="infos-bar">
+    <div class="info-item">
+      <span class="info-icon">📍</span>
+      <div>
+        <strong>Adresse</strong>
+        <span>Boulevard du 13 Janvier, Lomé</span>
+      </div>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">🕐</span>
+      <div>
+        <strong>Horaires</strong>
+        <span>Lun–Dim · 11h00 – 22h00</span>
+      </div>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">📞</span>
+      <div>
+        <strong>Réservation</strong>
+        <span>+228 90 00 00 00</span>
+      </div>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">⭐</span>
+      <div>
+        <strong>Note clients</strong>
+        <span>4.8 / 5 · 312 avis</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MENU DU JOUR ===== -->
+  <section class="section menu-section" id="menu">
+    <div class="section-header">
+      <p class="section-eyebrow">Cuisine du moment</p>
+      <h2 class="section-title">Menu du Jour</h2>
+      <p class="section-desc">Des plats préparés ce matin avec des ingrédients frais du marché local.</p>
+    </div>
+
+    <div class="menu-categories">
+      <button class="cat-btn active" data-cat="all">Tout</button>
+      <button class="cat-btn" data-cat="entree">Entrées</button>
+      <button class="cat-btn" data-cat="plat">Plats principaux</button>
+      <button class="cat-btn" data-cat="dessert">Desserts</button>
+      <button class="cat-btn" data-cat="boisson">Boissons</button>
+    </div>
+
+    <div class="menu-grid" id="menu-grid">
+      <!-- Les plats sont injectés via JS -->
+    </div>
+  </section>
+
+  <!-- ===== FORMULAIRE RESERVATION ===== -->
+  <section class="section reservation-section" id="reservation">
+    <div class="reservation-wrapper">
+      <div class="reservation-info">
+        <p class="section-eyebrow">Commandez en avance</p>
+        <h2 class="section-title">Réserver un plat</h2>
+        <p>Réservez votre repas à l'avance et évitez l'attente. Votre commande sera prête à l'heure de votre choix.</p>
+        <ul class="resa-advantages">
+          <li>✓ Confirmation instantanée</li>
+          <li>✓ Plat réservé à votre nom</li>
+          <li>✓ Paiement sur place</li>
+          <li>✓ Annulation gratuite jusqu'à 30 min avant</li>
+        </ul>
+      </div>
+
+      <div class="reservation-form-card">
+        <form id="form-reservation" novalidate>
+          <div class="form-group">
+            <label for="nom">Nom complet <span class="required">*</span></label>
+            <input type="text" id="nom" placeholder="Ex : Tando Dametoti" required />
+            <span class="error-msg" id="err-nom"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="telephone">Téléphone <span class="required">*</span></label>
+            <input type="tel" id="telephone" placeholder="Ex : +228 90 00 00 00" required />
+            <span class="error-msg" id="err-tel"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="plat-select">Choisir un plat <span class="required">*</span></label>
+            <select id="plat-select" required>
+              <option value="">-- Sélectionner un plat --</option>
+            </select>
+            <span class="error-msg" id="err-plat"></span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="quantite">Quantité</label>
+              <input type="number" id="quantite" min="1" max="10" value="1" />
+            </div>
+            <div class="form-group">
+              <label for="heure">Heure de récupération</label>
+              <input type="time" id="heure" min="11:00" max="22:00" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Instructions spéciales</label>
+            <textarea id="notes" rows="3" placeholder="Allergies, préférences, sans piment..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary btn-full">
+            <span>Confirmer la réservation</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONFIRMATION MODALE ===== -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal-confirmation">
+      <div class="modal-header">
+        <div class="modal-check">✓</div>
+        <h3>Réservation confirmée !</h3>
+        <p>Votre commande a bien été enregistrée.</p>
+      </div>
+      <div class="modal-body">
+        <div class="confirm-card">
+          <div class="confirm-row">
+            <span class="confirm-label">🍽️ Plat commandé</span>
+            <span class="confirm-value" id="conf-plat">—</span>
+          </div>
+          <div class="confirm-row">
+            <span class="confirm-label">👤 Nom</span>
+            <span class="confirm-value" id="conf-nom">—</span>
+          </div>
+          <div class="confirm-row">
+            <span class="confirm-label">🔢 Quantité</span>
+            <span class="confirm-value" id="conf-qty">—</span>
+          </div>
+          <div class="confirm-row">
+            <span class="confirm-label">⏱️ Temps d'attente</span>
+            <span class="confirm-value confirm-highlight" id="conf-temps">—</span>
+          </div>
+          <div class="confirm-row">
+            <span class="confirm-label">🕐 Prêt à</span>
+            <span class="confirm-value" id="conf-heure">—</span>
+          </div>
+          <div class="confirm-divider"></div>
+          <div class="confirm-row confirm-total">
+            <span class="confirm-label">💰 Montant total à payer</span>
+            <span class="confirm-value confirm-price" id="conf-montant">—</span>
+          </div>
+        </div>
+        <p class="modal-note">Présentez-vous à la caisse à l'heure indiquée. Paiement sur place (espèces ou mobile money).</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-outline" onclick="imprimerCommande()">🖨️ Imprimer</button>
+        <button class="btn-primary" onclick="fermerModal()">Parfait, merci !</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="logo-icon">🌿</span>
+        <span class="logo-text">Le Baobab Doré</span>
+        <p>Cuisine africaine authentique<br/>à Lomé, Togo.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <a href="#accueil">Accueil</a>
+        <a href="#menu">Menu</a>
+        <a href="#reservation">Réserver</a>
+      </div>
+      <div class="footer-contact" id="contact">
+        <h4>Contact</h4>
+        <p>📍 Bd du 13 Janvier, Lomé</p>
+        <p>📞 +228 90 00 00 00</p>
+        <p>✉️ contact@baobabdore.tg</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Le Baobab Doré — Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
